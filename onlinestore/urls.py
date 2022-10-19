@@ -16,13 +16,16 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from greetings.views import GoodMorningView,GoodAfternoonView
-from products.views import ProductsView
+from products.views import ProductsView,ProductDetailView
 # localhost:8000/morning/
 #localhost:8000/after/
+#localhost:products/2
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("morning/",GoodMorningView.as_view()),
     path("after/",GoodAfternoonView.as_view()),
-    path("products/",ProductsView.as_view())
+    path("products/",ProductsView.as_view()),
+    path("products/<int:id>/",ProductDetailView.as_view())
+
 
 ]
