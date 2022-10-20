@@ -1,3 +1,4 @@
+from http import server
 from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -21,9 +22,12 @@ class ProductsView(APIView):
 # get
 class ProductDetailView(APIView):
     def get(self,request,*args,**kw):
-        return Response(data="mobile detail")
-
-
+        id=kw.get("id")
+        qs=Mobiles.objects.filter(id=id)
+        serilizer=ProductSerializer(qs,many=True)
+        return Response(data=serilizer.data)
+        
+       
 
        
 
