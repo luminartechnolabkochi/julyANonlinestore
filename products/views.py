@@ -10,11 +10,13 @@ class ProductsView(APIView):
     def get(self,request,*args,**kw):
         
         qs=Mobiles.objects.all()
+
         if "brand" in request.query_params:
             qs=qs.filter(brand=request.query_params.get("brand"))
         if "band" in request.query_params:
-            qs=qs.filter(band=request.query_params.get("band"))
-        
+            qs=qs.filter(band=request.query_params.get("band")) 
+        if "price_lt" in request.query_params:
+            qs=qs.filter(price__lte=request.query_params.get("price_lt"))  
 
 
         serializer=ProductSerializer(qs,many=True)
